@@ -4,13 +4,20 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --prod",
+    "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "heroku-prebuild": "npm install -g @angular/cli @angular/compiler-cli typescript http-server",
+    "heroku-postbuild": "ng build --prod"
   },
   "private": true,
-  "browser": { "fs": false, "path": false, "os": false, "stream": false},
+  "browser": {
+    "fs": false,
+    "path": false,
+    "os": false,
+    "stream": false
+  },
   "dependencies": {
     "@angular/animations": "^6.0.3",
     "@angular/common": "^6.0.3",
