@@ -62,7 +62,8 @@ export class ObjectDetection {
     }
 
     async load() {
-        this.model = await tf.loadGraphModel('/assets/web_model_quantized_2bytes/model.json');
+        // this.model = await tf.loadGraphModel('/assets/new_web_model_quantized_2bytes/model.json');
+        this.model = await tf.loadGraphModel('/assets/new_model/model.json');
         // this.model = await tf.loadFrozenModel('/assets/old_model/tensorflowjs_model.pb', '/assets/old_model/weights_manifest.json');
 
         // Warmup the model.

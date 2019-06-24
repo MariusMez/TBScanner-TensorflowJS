@@ -52,6 +52,13 @@ export class AppComponent implements OnInit {
     }
 
     renderPredictions = predictions => {
+
+        // Crop the code from the video and paste them in the eyes canvas:
+        const codeCanvas = <HTMLCanvasElement>document.getElementById('code');
+        const codeCC = codeCanvas.getContext('2d');
+        const ratioX = this.video.videoWidth / this.video.width;
+        const ratioY = this.video.videoHeight / this.video.height;
+
         const canvas = <HTMLCanvasElement>document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
         canvas.width = 600;
@@ -62,7 +69,7 @@ export class AppComponent implements OnInit {
         const font = '14px sans-serif';
         ctx.font = font;
         ctx.textBaseline = 'top';
-        ctx.drawImage(this.video, 0, 0, 600, 600);
+        ctx.drawImage(this.video, 0, 0, canvas.width, canvas.height);
 
         predictions.forEach(prediction => {
             const x = prediction.bbox[0];
@@ -81,6 +88,8 @@ export class AppComponent implements OnInit {
             // Draw the text last to ensure it's on top.
             ctx.fillStyle = '#000000';
             ctx.fillText(`${prediction.class} (${(prediction.score * 100).toFixed(0)} %)`, x, y);
+
+            codeCC.drawImage(this.video, x * ratioX, y * ratioY, width + 5, height + 5, 0, 0, codeCanvas.width, codeCanvas.height);
         });
     }
 }
